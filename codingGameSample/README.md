@@ -1,5 +1,5 @@
 # CodingGame
 
-## <https://www.codingame.com/ide/puzzle/mime-type>
+## <https://www.codingame.com/>
 
-usage :  `cat mimetype-input.txt | go  run mimetype.go`
+Entrainement > Puzzles
