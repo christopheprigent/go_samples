@@ -8,7 +8,6 @@ import s "strings"
 /**
  * Usage : cat mimetype-input3.txt | go run mimetype.go
  **/
-
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Buffer(make([]byte, 1000000), 1000000)
@@ -18,34 +17,28 @@ func main() {
 	scanner.Scan()
 	fmt.Sscan(scanner.Text(), &Q)
 
-	mimes := make([]Mime, N)
+	mimes := make([]_mime, N)
 	for i := 0; i < N; i++ {
-		m := Mime{}
+		m := _mime{}
 		scanner.Scan()
 		fmt.Sscan(scanner.Text(), &m.ext, &m.mimeValue)
 		m.ext = s.ToLower(m.ext)
 		mimes[i] = m
 	}
-	var found = false
 	for i := 0; i < Q; i++ {
 		scanner.Scan()
 		FNAME := s.ToLower(scanner.Text()) // One file name per line.
-		found = false
+		currentMimeValue := "UNKNOWN"
 		for i := 0; i < N; i++ {
 			if s.HasSuffix(FNAME, "."+mimes[i].ext) {
-				fmt.Println(mimes[i].mimeValue)
-				found = true
+				currentMimeValue = mimes[i].mimeValue
 				break
 			}
 		}
-		if found == false {
-			fmt.Println("UNKNOWN")
-		}
-
+		fmt.Println(currentMimeValue)
 	}
 }
 
-type Mime struct {
+type _mime struct {
 	ext, mimeValue string
 }
-type Mimes []Mime
